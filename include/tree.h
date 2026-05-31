@@ -2,6 +2,7 @@
 #ifndef INCLUDE_TREE_H_
 #define INCLUDE_TREE_H_
 
+#include <cstdint>
 #include <vector>
 
 class PMTree {
@@ -17,13 +18,13 @@ class PMTree {
     ~PMTree();
 
  private:
-  Node* buildSubtree(const std::vector<char>& other);
-  void deleteNode(Node *node);
+    Node* buildSubtree(const std::vector<char>& other);
+    void deleteNode(Node *node);
 };
 
 std::vector<std::vector<char>> getAllPerms(const PMTree &tree);
 std::vector<char> getPerm1(const PMTree &tree, int loc);
 std::vector<char> getPerm2(const PMTree &tree, int loc);
-unsigned long long factorial(int n);
+uint64_t factorial(int n);
 
 #endif  // INCLUDE_TREE_H_
