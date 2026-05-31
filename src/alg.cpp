@@ -1,9 +1,8 @@
 // Copyright 2022 NNTU-CS
-#include "tree.h"
-
 #include <algorithm>
 #include <cstdint>
 #include <vector>
+#include "tree.h"
 
 uint64_t factorial(int n) {
     uint64_t res = 1;
