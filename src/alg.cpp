@@ -1,17 +1,19 @@
 // Copyright 2022 NNTU-CS
-#include  <algorithm>
-#include  <vector>
-#include  "tree.h"
+#include "tree.h"
 
-unsigned long long factorial(int n) {
-    unsigned long long res = 1;
-    for (int i = 2; i<= n; ++i) res *= i;
+#include <algorithm>
+#include <cstdint>
+
+uint64_t factorial(int n) {
+    uint64_t res = 1;
+    for (int i = 2; i <= n; ++i) res *= i;
     return res;
 }
 
-static void navigationg(PMTree::Node *node, int remaining, unsigned long long num, std::vector<char>& res) {
+static void navigationg(PMTree::Node *node, int remaining,
+                        uint64_t num, std::vector<char>& res) {
     if (remaining == 0) return;
-    unsigned long long block = factorial(remaining - 1);
+    uint64_t block = factorial(remaining - 1);
     for (PMTree::Node *child : node->childs) {
         if (num <= block) {
             res.push_back(child->val);
@@ -64,7 +66,8 @@ PMTree::~PMTree() {
 }
 
 static void dSearch(PMTree::Node *node,
-    std::vector<char>& way, std::vector<std::vector<char>>& result) {
+                    std::vector<char>& way,
+                    std::vector<std::vector<char>>& result) {
     if (node->childs.empty()) {
         result.push_back(way);
         return;
@@ -90,16 +93,17 @@ std::vector<std::vector<char>> getAllPerms(const PMTree &tree) {
 
 std::vector<char> getPerm1(const PMTree &tree, int loc) {
     auto all = getAllPerms(tree);
-    if (loc >= 1 && static_cast<size_t>(loc) <= all.size()) return all[loc - 1];
+    if (loc >= 1 && static_cast<size_t>(loc) <= all.size())
+        return all[loc - 1];
     return {};
 }
 
 std::vector<char> getPerm2(const PMTree &tree, int loc) {
     int n = tree.size;
-    unsigned long long whole = factorial(n);
-    if (loc < 1 || static_cast<unsigned long long>(loc) > whole) return {};
+    uint64_t whole = factorial(n);
+    if (loc < 1 || static_cast<uint64_t>(loc) > whole) return {};
     std::vector<char> result;
     result.reserve(n);
-    navigationg(tree.root, n, static_cast<unsigned long long>(loc), result);
+    navigationg(tree.root, n, static_cast<uint64_t>(loc), result);
     return result;
 }
