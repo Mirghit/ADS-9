@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <cstdint>
+#include <vector>
 
 uint64_t factorial(int n) {
     uint64_t res = 1;
