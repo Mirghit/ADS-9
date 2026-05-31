@@ -1,9 +1,12 @@
 // Copyright 2022 NNTU-CS
 #include "tree.h"
-#include <iostream>
+
 #include <chrono>
-#include <random>
+#include <cstdint>
 #include <iomanip>
+#include <iostream>
+#include <random>
+#include <vector>
 
 int main() {
     std::vector<char> in = {'1', '2', '3'};
@@ -16,8 +19,13 @@ int main() {
     }
     auto p1 = getPerm1(tree, 1);
     auto p2 = getPerm2(tree, 2);
-    std::cout << "getPerm1(1): "; for (char c : p1) std::cout << c; std::cout << "\n";
-    std::cout << "getPerm2(2): "; for (char c : p2) std::cout << c; std::cout << "\n\n";
+    std::cout << "getPerm1(1): ";
+    for (char c : p1) std::cout << c;
+    std::cout << "\n";
+    std::cout << "getPerm2(2): ";
+    for (char c : p2) std::cout << c;
+    std::cout << "\n\n";
+
     const int N_MAX = 10;
     const int REPEAT = 3;
     std::random_device rd;
@@ -28,9 +36,9 @@ int main() {
         std::vector<char> chars;
         for (int i = 0; i < n; ++i) chars.push_back('a' + i);
         PMTree tree(chars);
-        unsigned long long total = factorial(n);
-        std::uniform_int_distribution<unsigned long long> dist(1, total);
-        unsigned long long rand_num = dist(gen);
+        uint64_t total = factorial(n);
+        std::uniform_int_distribution<uint64_t> dist(1, total);
+        uint64_t rand_num = dist(gen);
         double sum_all = 0.0, sum_p1 = 0.0, sum_p2 = 0.0;
         for (int r = 0; r < REPEAT; ++r) {
             auto start = std::chrono::high_resolution_clock::now();
